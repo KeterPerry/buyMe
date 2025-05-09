@@ -1,0 +1,12 @@
+<?xml version= "1.0" encoding= "utf-8"?>
+<config>
+    <browserType>Chrome</browserType>
+    <configPath>C:\\Users\\keter\\Desktop\\Automation Dev\\SELENIUM\\ExercisePomFINAL\\src\\testData\\config.xml
+    </configPath>
+    <websiteName>https://buyme.co.il/</websiteName>
+    <email>keterav@gmail.com</email>
+    <invalid_email>keterav</invalid_email>
+    <code>456789</code>
+    <telephone_num>0507744085</telephone_num>
+    <password>keterP12345678@</password>
+</config>
