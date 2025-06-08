@@ -1,100 +1,93 @@
-
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-//import org.junit.Assert;
-//import org.junit.BeforeClass;
-//import org.junit.Test;
+import pageObject.BasePage;
+import pageObject.LoginPage;
+import testsData.Constants;
 
 import java.io.IOException;
+import java.util.Optional;
 
-public class LoginTest extends Base{
+public class LoginTest extends Base {
 
     @Epic("buyMe Automation")
     @Feature("LoginPage Testing")
 
-    @BeforeClass
-    public static void settingPage(){
-    driver.get("https://buyme.co.il/?modal=login");
-    }
 
-
-    @Test
-    public void invalid_email_address() {
-
-        try {
-            String email= readFromFile("invalid_email", configPath);
-            //Thread.sleep(5000);
-            String expected_result="ערך זה אינ ו תקין";
-            verifyText(loginPage.error_invalid_email,expected_result);
-        } catch (InterruptedException | IOException e ) {
-            throw new RuntimeException(e);
-        }
-
+    @BeforeMethod
+    public void LoginPageAppears(){
+        verifyLoginPageLoads();
+        verifyGoogleloginPopupAppears();
     }
 
     @Test
-    public void loginNonExistent() {
-
-        try {
-            loginPage.loginSuccessfully("kate@gmail.com", "kateP@1234456789",loginPage.buttonSubmit);
-            Thread.sleep(5000);
-            verifyText(loginPage.error_non_existent,"The password for this account has expired.\nTo log in, please reset your password.");
-        } catch (IOException | InterruptedException e) {
-        }
-
+    public void InvalidLoginInFields() throws IOException, InterruptedException {
+        verifyErrorMessageInRed();
     }
 
     @Test
-    public void valid_user_loginCheck() {
+    public void validLoginInDetails() throws IOException, InterruptedException {
+        verifyValidLogin();
+    }
 
-        try {
-            String email= readFromFile("email", configPath);
-            String code= readFromFile("code", configPath);
-            String telephone_num= readFromFile("telephone_num", configPath);
-            //String password= readFromFile("password", configPath);
-            loginPage.loginSuccessfully(email,code,telephone_num);
-            Thread.sleep(5000);
-        } catch (InterruptedException | IOException e ) {
-            throw new RuntimeException(e);
+    ////////STEPS/////
+
+
+    @Step("verifyLoginPageLoads")
+    public void verifyLoginPageLoads() {
+        loginPage.clickOnBtn(homePage.login_registration_btn);
+        attachScreenshot(driver,"verifyLoginPageLoads");
+        verifyOpenPage("login", "verifyLoginPageLoads", false, Optional.empty());
+
+    }
+
+
+    @Step("verifyGoogleloginPopupAppears")
+    public void verifyGoogleloginPopupAppears() {
+        String originalWindow = driver.getWindowHandle();
+        loginPage.clickOnBtn(loginPage.google_btn_login);
+        loginPage.switchToAnewTab(originalWindow);
+        attachScreenshot(driver,"verifyGoogleloginPopupAppears");
+        Assert.assertTrue(driver.getCurrentUrl().toLowerCase().contains(Constants.GOOGLE_LOGIN_URL));
+
+    }
+
+
+    @Step("verifyErrorMessageInRed")
+    public void verifyErrorMessageInRed() throws IOException, InterruptedException {
+        String invalidEmail= readFromFile("invalid_email1");
+        int trials=0;
+        do {
+            loginPage.setField(loginPage.mail_field, invalidEmail);
+            loginPage.clickOnBtn(loginPage.next_btn);
+            if(trials<2)
+            {loginPage.clickOnBtn(loginPage.try_again_message);}
+            trials++;
         }
+        while (trials<3);
+
+        attachScreenshot(driver,"verifyErrorMessageInRed");
+        verifyError(loginPage.error_message, loginPage.getText(loginPage.error_message),"#b3261e","verifyErrorMessageInRed");
 
     }
 
-    @Test
-    public void redirectToHomePage() throws InterruptedException {
-        try {
-            String currentUrl=driver.getCurrentUrl();
-            compareUrls(currentUrl,loginPage.newUser);
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    //test2
+
+    @Step("verifyValidLogin")
+    public void verifyValidLogin() throws IOException, InterruptedException {
+        String validEmail= readFromFile("valid_email");
+        loginPage.setField(loginPage.mail_field,validEmail);
+        loginPage.clickOnBtn(loginPage.next_btn);
+        attachScreenshot(driver,"verifyValidLogin");
+        verifyOpenPage(websiteName,"verifyValidLogin",false,Optional.empty());
 
     }
 
-    @Test
-    public void redirectToPasswordPage2() throws InterruptedException {
-        try {
-            String currentUrl = driver.getCurrentUrl();
-            compareUrls(currentUrl, loginPage.forgotPassword);
-            Thread.sleep(2000);
-        }
-      catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void passwordPage() throws IOException, InterruptedException {
-            loginPage.click(loginPage.forgotPassword);
-            String email= readFromFile("email", configPath);
-            loginPage.setField(loginPage.forgotPasswordEmail,email);
-            loginPage.click(loginPage.forgotPasswordSubmitbtn);
-            verifyText(loginPage.changePasswordNote,"If the email you provided exists in our system you will soon receive an email containing a password reset link. Please check your inbox and spam folder.");
-            Thread.sleep(5000);
-    }
-    }
 
 
+}

@@ -2,21 +2,31 @@ package pageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.tracing.opentelemetry.SeleniumSpanExporter;
+
+import java.util.List;
 
 public class HomePage extends BasePage {
 
-    static WebDriver driver;
+    public WebDriver driver;
 
-    //Elements
-    public By titleForm= By.className("saFormHeaderProd");
-    public By registration= By.cssSelector("button[class='btn btn-theme btn-login']");
-    public By login_here= By.linkText("here");
-    public By select_amount= By.xpath("//select[@data-parsley-id='16']");
-    public By select_area= By.xpath("//select[@data-parsley-id='18']");
-    public By select_category= By.xpath("//select[@name=\"category\"]");
-    public By search_btn_link= By.xpath("//a[@href=\"https://buyme.co.il/search?budget=3&category=5&region=11\"]");
-    public By clear_fields_btn= By.xpath("//button[@gtm=\"נקה\"]");
+    //elements
+    public By login_registration_btn= By.xpath("//li[@class='notSigned']");
+    public By select= By.xpath("//select[@class=\"sr-only-focus\"]");
+    public By select_final_area= By.xpath("//select[@class=\"sr-only-focus\" and contains(@aria-label, \"אזור\")]");
+    public By select_final_budget= By.xpath("//select[@class=\"sr-only-focus\" and contains(@aria-label, \"סכום\")]");
+    public By select_final_category= By.xpath("//select[@class=\"sr-only-focus\" and contains(@aria-label, \"קטגוריה\")]");
+    public By search_btn_link= By.xpath("//div[@class='inner']//a[@rel=\"nofollow\" and contains(@href, \"https://buyme.co.il/search\")]");
+    public By clear_fields_btn= By.xpath("//button[@gtm='נקה חיפוש']");
+    //voucher
+    public By checking_voucher_balance_btn= By.xpath("//ul[@class='nav-bar buttons nav-bar-box nav-bar-left']//li[2]/a");
+    public By voucher_popUp= By.xpath("//div[@class=\"inner popout\"]");
+    public By voucher_code_field= By.xpath("//div[@class=\"inner popout\"]//input[@data-parsley-required-message=\"יש להזין קוד שובר\"]");
+    public By voucher_expired_date_field= By.xpath("//div[@class=\"inner popout\"]//input[@data-parsley-required-message=\"יש להזין תוקף שובר\"]");
+    public By checking_balance_button_submit= By.xpath("//button[@gtm=\"לבדיקת היתרה\"]");
+    public By errorMessage= By.xpath("//div[@class=\"mx-12 top-xs error-message center\"]/span");
+    //sending gifts
+    public By sendingGifts_btn= By.xpath("//ul[@class=\"nav-bar links nav-bar-box nav-bar-right\"]/li");
+
 
     //constructor
 
@@ -26,28 +36,46 @@ public class HomePage extends BasePage {
 
     //functions
 
-    public HomePage registrationClick(By element){
-        this.click(element);
+    public  HomePage clickOnBtn(By locator){
+        this.click_on_btn(locator);
         return this;
     }
 
-//    public  HomePage selectCategory(By element, String value){
-//        this.selectClickOnValue(element,value);
-//        return this;
-//    }
+    public  HomePage forceClick(By locator){
+        this.force_click(locator);
+        return this;
+    }
 
-    public  HomePage seacrhClick(){
-        this.click(search_btn_link);
+    public HomePage setField(By locator, String text_val){
+        this.sendText(locator, text_val);
         return this;
     }
-    public  HomePage clear_field(){
-        this.clear(clear_fields_btn);
-        return this;
+
+
+    public  boolean isPresent(By locator){
+        return this.is_present(locator);
+
     }
-    public boolean checkSelectCategory(By element, String value){
-       if(this.check_Select_category(element));
+
+
+    public boolean checkSelectCategory(By locator, List<String> expected ){
+       if(this.check_Select_category(locator,expected));
         return true;
     }
+
+
+    public boolean isSelectClear(By locator){
+        if(this.is_select_clear(locator));
+        return true;
+    }
+
+    public  HomePage selectInsertValue(By locator, String value){
+        this.select_insert_value(locator,value);
+        return this;
+    }
+
+
+
 
 
 

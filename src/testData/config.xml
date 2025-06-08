@@ -1,12 +1,20 @@
 <?xml version= "1.0" encoding= "utf-8"?>
+
 <config>
     <browserType>Chrome</browserType>
-    <configPath>C:\\Users\\keter\\Desktop\\Automation Dev\\SELENIUM\\ExercisePomFINAL\\src\\testData\\config.xml
-    </configPath>
     <websiteName>https://buyme.co.il/</websiteName>
-    <email>keterav@gmail.com</email>
+
+    <!--user data -->
+    <email>heading-examine@u4hxuyde.mailosaur.net</email>
+    <fullName>Kineret Cohen</fullName>
+    <invalid_email1>ketgmail.com</invalid_email1>
+    <invalid_email2>ket@gmailcom</invalid_email2>
     <invalid_email>keterav</invalid_email>
+    <valid_email>keterav@gmail.com</valid_email>
     <code>456789</code>
     <telephone_num>0507744085</telephone_num>
     <password>keterP12345678@</password>
+
+
+
 </config>

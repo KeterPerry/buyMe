@@ -3,63 +3,40 @@ package pageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage extends BasePage {
+public class LoginPage extends BasePage{
 
-    static WebDriver driver;
+    public WebDriver driver;
 
-    //Elements
-
-    protected By email_btn= By.cssSelector(".social-btn");
-    protected By email_field= By.xpath("//label[@class=\"ember-view bm-field bm-input empty blur with-icon md reverse no-label\"]//input[@type=\"email\"]");
-    public By error_invalid_email= By.cssSelector("ul[class='parsley-errors-list filled']");
-
-    protected By code= By.cssSelector("#otp-code");
-    public By telephone_num_field= By.xpath("//input[@type=\"tel\"]");
-    protected By buttonSubmit= By.xpath("//button[@gtm=\"כניסה\" and @type=\"submit\"]");
-    protected By buttonSubmit_phone_verification= By.xpath("//button[@gtm='שלחו לי קוד אימות']");
-    //protected By error_non_existent = By.xpath("//div[@class=\"error\"]/p");
-    //protected By newUser = By.xpath("//*[@id=\"ibox_form_body\"]/p[2]/a");
-    //protected By forgotPassword = By.xpath(" //*[@id=\"ibox_form_body\"]/p[1]/a[1]");
-
-    ///passwordPage
-//    public By forgotPasswordEmail = By.id("useremail");
-//    public By forgotPasswordSubmitbtn = By.cssSelector("input[value='Next']");
-//    public By changePasswordNote = By.xpath("//*[@id=\"ibox_form_body\"]/p[1]/strong");
+    //elements
+    public By google_btn_login= By.xpath("//div[@class='option easy']//div[@class=\"social-btn google\"]");
+    public By mail_field=By.xpath("//input[@type=\"email\"]");
+    public By next_btn=By.cssSelector("button[id='identifierNext']");
+    public By error_message=By.xpath("//div[@jsname=\"dWPKW\"]//span[@jsslot]");
+    public By try_again_message=By.xpath("//a[@id=\"next\"]");
 
 
-
-
-
-    //Constructor
+    //constructor
     public LoginPage(WebDriver driver){
         super(driver);
     }
 
-
     //functions
-
-    public LoginPage setField(By element, String text_val){
-        sendText(element, text_val);
+    public LoginPage clickOnBtn(By locator){
+        this.click_on_btn(locator);
         return this;
     }
 
-   public  LoginPage clickOnBtn(By element){
-      click(element);
-       return this;
-   }
-
-   public  LoginPage loginSuccessfully(String email_, String code_, String telephone_num_field_){
-       this.setField(email_field, email_);
-        this.clickOnBtn(buttonSubmit);
-        this.setField(code,code_);
-        this.clickOnBtn(buttonSubmit);
-        this.setField(telephone_num_field, telephone_num_field_);
-        this.clickOnBtn(buttonSubmit_phone_verification);
+    public LoginPage switchToAnewTab(String originalWindow){
+        this.switch_to_a_new_tab(originalWindow);
         return this;
-   }
-
-    public String Base_getText(By element_name){
-        System.out.println(element_name);
-        {return get_Text(element_name);}
     }
+
+    public LoginPage setField(By locator, String text_val){
+        this.sendText(locator, text_val);
+        return this;
+    }
+    public String getText(By locator){
+        return get_text(locator);
+    }
+
 }

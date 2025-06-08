@@ -1,43 +1,115 @@
-//import com.aventstack.extentreports.Status;
-//import org.junit.Assert;
-//import org.junit.BeforeClass;
-//import org.junit.Test;
-//
-//public class RegistrationTest extends Base {
-//public static String registration_url="https://account.next.co.il/he/CustomerRegistration";
-//
-//    @BeforeClass
-//    public static void SettingUp(){
-//        driver.get(registration_url);
-//
-//    }
-//
-//    @Test
-//    public void Test1Registration(){
-//        test= extent.createTest("valid registration");
-//        try {
-//            registrationPage.registerSuccessfully("Mrs","keter", "Danon", "keterav@gmail.com", "keterPe12345@", "0507744085", "Aya 6", "Meitar", "8502500");
-//            test.log(Status.INFO, "register Successfully operation started");
-//            Assert.assertEquals("https://www.next.co.il/he", websiteName);
-//        }
-//        catch (Exception e){
-//            e.getMessage();
-//        }
-//    }
-//
-//    @Test
-//    public void Test2ExistRegistant(){
-//        test= extent.createTest("ExistRegistant");
-//        try {
-//            registrationPage.registerSuccessfully("Mrs","yali", "Danon", "keterav@gmail.com", "keterPe12345@", "0507744085", "Aya 6", "Meitar", "8502500");
-//            registrationPage.setField(registrationPage.FirstName,"yali");
-//            registrationPage.setField(registrationPage.LastName,"Bam");
-//            registrationPage.setField(registrationPage.Email,"keterav@gmail.com");
-//            test.log(Status.INFO, "exist registrator notification");
-//            verifyText(registrationPage.Email_error, "דוא\"ל זה כבר נמצא בשימוש. אנא היכנס/י כדי להשתמש בחשבון נקסט הקיים שלך." );
-//        }
-//        catch (Exception e){
-//            e.getMessage();
-//        }
-//    }
-//}
+
+import com.mailosaur.MailosaurException;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import java.io.IOException;
+import java.util.Optional;
+import static testsData.Constants.*;
+
+
+
+public class RegistrationTest extends Base {
+
+        @Epic("buyMe Automation")
+        @Feature("RegistrationPage Testing")
+
+        @BeforeMethod
+        public void registrationPageAppears(){
+            verifyRegistrationPageLoads();
+            verifyRegistrationPopupAppears();
+        }
+
+
+        @Test
+        public void InvalidRegistartionFields() throws IOException, InterruptedException {
+            verifyErrorMessageInRed();
+        }
+
+        @Test
+        public void validRegistrationInDetails() throws IOException, InterruptedException, MailosaurException {
+            verifyValidRegistration();
+        }
+
+
+        ///////STEPS/////////////
+
+//Test 1
+
+        @Step("verifyRegistrationPageLoads")
+        public void verifyRegistrationPageLoads() {
+            registrationPage.clickOnBtn(homePage.login_registration_btn);
+            attachScreenshot(driver,"verifyRegistrationPageLoads");
+            verifyOpenPage("login", "verifyLoginPageLoads", false, Optional.empty());
+
+        }
+
+
+        @Step("verifyRegistrationPopupAppears")
+        public void verifyRegistrationPopupAppears() {
+            try {
+                registrationPage.clickOnBtn(registrationPage.email_btn);
+                attachScreenshot(driver,"verifyRegistrationPopupAppears");
+                Assert.assertTrue(registrationPage.isDisplayed(registrationPage.popUpLogin));
+                Assert.assertTrue(registrationPage.isDisplayed(registrationPage.email_field));
+                Assert.assertTrue(registrationPage.isDisplayed(registrationPage.popUpLogin));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        @Step("InvalidEmail")
+        public void verifyErrorMessageInRed() throws IOException, InterruptedException {
+            String invalidEmail = readFromFile("invalid_email1");
+            registrationPage.clickOnBtn(registrationPage.email_field);
+            registrationPage.setField(registrationPage.email_field, invalidEmail);
+            registrationPage.clickOnBtn(registrationPage.buttonSubmit);
+            attachScreenshot(driver,"verifyErrorMessageInRed");
+            verifyError(registrationPage.error_invalid_email, "ערך זה צריך להיות כתובת אימייל.", ERROR_COLOR, "invalidEmail");
+
+        }
+
+//@Test 2
+
+
+        @Step
+        public void verifyValidRegistration() throws MailosaurException, IOException, InterruptedException {
+            String validEmail = readFromFile("email");
+            String fullName = readFromFile("fullName");
+            String telephone_num = readFromFile("telephone_num");
+            String website_name = readFromFile("websiteName");
+            registrationPage.registerSuccessfully(validEmail,fullName,telephone_num);
+//            registrationPage.clickOnBtn(registrationPage.email_btn);
+//            registrationPage.setField(registrationPage.email_field, validEmail);
+//            registrationPage.clickOnBtn(registrationPage.buttonSubmit);
+            //String verificationCode = email_phoneVerfication();
+            //registrationPage.clickOnBtn(homePage.login_registration_btn);
+            //registrationPage.clickOnBtn(registrationPage.email_field);
+//            registrationPage.setField(registrationPage.email_code, verificationCode);
+//            registrationPage.clickOnBtn(registrationPage.buttonSubmit_mail_verification);
+//            registrationPage.setField(registrationPage.fullName, fullName);
+//            registrationPage.setField(registrationPage.telephone_num_field,telephone_num);
+//            registrationPage.clickOnCheckBox(registrationPage.checkBox);
+//            registrationPage.clickOnBtn(registrationPage.register_button);
+            attachScreenshot(driver,"verifyValidRegistration");
+            Assert.assertEquals(websiteName,website_name);
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+

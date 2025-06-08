@@ -1,71 +1,84 @@
-//package pageObject;
-//
-//import org.openqa.selenium.By;
-//import org.openqa.selenium.WebDriver;
-//import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.support.ui.Select;
-//
-//public class RegistrationPage extends BasePage{
-//    static WebDriver driver;
-//    By titleCombo= By.xpath("//*[@id=\"Title\"]");
-//    public By FirstName= By.id("FirstName");
-//    public By LastName= By.id("LastName");
-//    public By Email= By.xpath("//*[@id='Email']");
-//    public By Email_error= By.id("Email-error");
-//    By Password= By.xpath("//*[@id=\"Password\"]");
-//    By PhoneNumber= By.xpath("//*[@id=\"PhoneNumber\"]");
-//    By HomeLine= By.id("AddressLine2");
-//    By cityLine= By.id("AddressLine4");
-//    By zipCode= By.id("AddressLine6");
-//
-//    By checkByEmail= By.xpath("//*[@for=\"ChkByEmail\"]");
-//    By SignupButton= By.xpath("//*[@id=\"SignupButton\"]");
-//
-//
-//
-//    //constructor
-//
-//    public RegistrationPage(WebDriver driver){
-//        super(driver);
-//    }
-//
-//    //functions
-//
-//    public RegistrationPage setField(By element, String text_val){
-//        sendText(element, text_val);
-//        return this;
-//    }
-//
-//    public RegistrationPage ClickOnBtn(By element){
-//        click(element);
-//        return this;
-//    }
-//
-//    public RegistrationPage ClickOnChkBox(By element){
-//        ClickOnCheckBox(element);
-//        return this;
-//    }
-//
-//    public RegistrationPage selectE(By element, String value){
-//        selectClickOnValue(element, value);
-//        return this;
-//    }
-//
-//    public RegistrationPage registerSuccessfully(String value_, String FirstName_,String LastName_, String email_, String password_, String Phone_num_, String homeLine_, String cityLine_, String zipCode_) throws InterruptedException {
-//        this.selectE(titleCombo,value_);
-//        this.setField(FirstName, FirstName_);
-//        this.setField(LastName, LastName_);
-//        this.setField(Email, email_);
-//        this.setField(Password, password_);
-//        this.setField(PhoneNumber, Phone_num_);
-//        this.setField(HomeLine, homeLine_);
-//        this.setField(cityLine, cityLine_);
-//        this.setField(zipCode, zipCode_);
-//        this.ClickOnChkBox(checkByEmail);
-//        this.ClickOnBtn(SignupButton);
-//        return this;
-//    }
-//
-//
-//}
-//
+package pageObject;
+
+import com.mailosaur.MailosaurException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import java.io.IOException;
+
+public class RegistrationPage extends BasePage {
+
+    public WebDriver driver;
+
+    //elements
+    public By email_btn= By.xpath("//div[@class=\"option easy\"]//div[2]");
+    public By email_field= By.xpath("//label[@class=\"ember-view bm-field bm-input empty blur with-icon md reverse no-label\"]//input[@type=\"email\"]");
+    public By error_invalid_email= By.cssSelector("ul[class='parsley-errors-list filled']");
+    public By popUpLogin=By.xpath("//div[@class= 'login-step-2']");
+    public By email_code= By.cssSelector("#otp-code");
+    public By telephone_num_field= By.xpath("//input[@type=\"tel\"]");
+    public By buttonSubmit= By.xpath("//button[@gtm=\"כניסה\" and @type=\"submit\"]");
+    public By send_phone_verification_code_btn= By.xpath("//button[@gtm='שלחו לי קוד אימות']");
+    public By phone_verification_otp_code_field= By.xpath("////input[@id=\"otp-code\"]");
+    public By phone_verification_otp_code_btn= By.xpath("//button[@gtm=\"אימות טלפון\"]");
+    public By buttonSubmit_mail_verification= By.xpath("//button[@gtm=\"אימות מייל\"]");
+    public By fullName= By.xpath("//input[@data-parsley-namecheck=\"full-name\"]");
+    //public By phone_num= By.xpath("//input[@tuaandiinputdiscrp=\"טלפון נייד\"]");
+    public By checkBox= By.xpath("//div[@class=\"login-options register-text terms\"]//div[@class=\"inner\"]/span[@role=\"checkbox\"]");
+    public By register_button= By.xpath("//button[@gtm=\"הרשמה\"]");
+
+
+
+
+    //Constructor
+    public RegistrationPage(WebDriver driver){
+        super(driver);
+    }
+
+
+    //functions
+    public RegistrationPage setField(By locator, String text_val){
+        this.sendText(locator, text_val);
+        return this;
+    }
+
+
+   public RegistrationPage clickOnBtn(By locator){
+      this.click_on_btn(locator);
+       return this;
+   }
+
+    public RegistrationPage clickOnCheckBox(By locator){
+        this.click_on_check_box(locator);
+        return this;
+    }
+
+    public RegistrationPage registerSuccessfully(String validEmail, String fullName_, String telephone_num ) throws MailosaurException, IOException, InterruptedException {
+        clickOnBtn(email_field);
+        setField(email_field, validEmail);
+        clickOnBtn(buttonSubmit);
+        String verificationCode = email_phoneVerfication();
+        clickOnBtn(email_code);
+        setField(email_code, verificationCode);
+        clickOnBtn(buttonSubmit);
+        if (isDisplayed(send_phone_verification_code_btn)){
+            setField(telephone_num_field, telephone_num);
+            clickOnBtn(send_phone_verification_code_btn);
+            Thread.sleep(50000);//50 seconds
+            clickOnBtn(phone_verification_otp_code_btn);
+        }
+        else {
+            setField(fullName, fullName_);
+            setField(telephone_num_field, telephone_num);
+            clickOnCheckBox(checkBox);
+            clickOnBtn(register_button);
+        }
+        return this;
+    }
+
+
+
+    public String getText(By locator){
+        {return get_text(locator);}
+    }
+}

@@ -26,7 +26,7 @@
 
 
 
-    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+    <!-- ✅Testng -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
@@ -34,14 +34,19 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- allure -->
+    <!-- ✅allure or TestNg -->
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-testng</artifactId>
       <version>2.24.0</version> <!-- this works well -->
     </dependency>
 
-
+    <!-- ✅webdrivermanager -->
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>5.8.0</version> <!-- or latest -->
+    </dependency>
 
 
     <!-- ✅ commons-io -->
@@ -51,7 +56,40 @@
       <version>2.8.0</version>
     </dependency>
 
+
+    <!-- ✅ mailosaur  -->
+    <dependency>
+      <groupId>com.mailosaur</groupId>
+      <artifactId>mailosaur-java</artifactId>
+      <version>8.3.0</version>
+    </dependency>
+
+
+    <!-- ✅ dotenv  -->
+    <dependency>
+      <groupId>io.github.cdimascio</groupId>
+      <artifactId>dotenv-java</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+
+      <!-- ✅ logback  -->
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.4.14</version> <!-- or latest -->
+    </dependency>
+
+    <!-- ✅slf4j-simple   -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.36</version>
+    </dependency>
+
   </dependencies>
+
+
+  <!-- build(plugins)   -->
 
   <build>
     <plugins>
@@ -65,17 +103,8 @@
         </configuration>
       </plugin>
 
-      <!-- Maven Surefire Plugin for running tests on jenkis -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.2</version>
-        <configuration>
-          <skipTests>false</skipTests>
-        </configuration>
-      </plugin>
 
-      <!-- Allure report generation plugin -->
+      <!-- Allure report maven plugin -->
           <plugin>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-maven</artifactId>
