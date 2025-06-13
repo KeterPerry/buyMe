@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 
+/////registrationAndLoginViaEnteringAMail//////////
 public class RegistrationPage extends BasePage {
 
     public WebDriver driver;
@@ -22,7 +23,7 @@ public class RegistrationPage extends BasePage {
     public By phone_verification_otp_code_field= By.xpath("////input[@id=\"otp-code\"]");
     public By phone_verification_otp_code_btn= By.xpath("//button[@gtm=\"אימות טלפון\"]");
     public By buttonSubmit_mail_verification= By.xpath("//button[@gtm=\"אימות מייל\"]");
-    public By fullName= By.xpath("//input[@data-parsley-namecheck=\"full-name\"]");
+    public By fullNameField= By.xpath("//input[@data-parsley-namecheck=\"full-name\"]");
     //public By phone_num= By.xpath("//input[@tuaandiinputdiscrp=\"טלפון נייד\"]");
     public By checkBox= By.xpath("//div[@class=\"login-options register-text terms\"]//div[@class=\"inner\"]/span[@role=\"checkbox\"]");
     public By register_button= By.xpath("//button[@gtm=\"הרשמה\"]");
@@ -53,32 +54,9 @@ public class RegistrationPage extends BasePage {
         return this;
     }
 
-    public RegistrationPage registerSuccessfully(String validEmail, String fullName_, String telephone_num ) throws MailosaurException, IOException, InterruptedException {
-        clickOnBtn(email_field);
-        setField(email_field, validEmail);
-        clickOnBtn(buttonSubmit);
-        String verificationCode = email_phoneVerfication();
-        clickOnBtn(email_code);
-        setField(email_code, verificationCode);
-        clickOnBtn(buttonSubmit);
-        if (isDisplayed(send_phone_verification_code_btn)){
-            setField(telephone_num_field, telephone_num);
-            clickOnBtn(send_phone_verification_code_btn);
-            Thread.sleep(50000);//50 seconds
-            clickOnBtn(phone_verification_otp_code_btn);
-        }
-        else {
-            setField(fullName, fullName_);
-            setField(telephone_num_field, telephone_num);
-            clickOnCheckBox(checkBox);
-            clickOnBtn(register_button);
-        }
-        return this;
     }
 
 
 
-    public String getText(By locator){
-        {return get_text(locator);}
-    }
-}
+
+

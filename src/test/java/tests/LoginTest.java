@@ -1,23 +1,19 @@
-import io.qameta.allure.Description;
+package tests;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pageObject.BasePage;
-import pageObject.LoginPage;
 import testsData.Constants;
-
 import java.io.IOException;
 import java.util.Optional;
 
-public class LoginTest extends Base {
+@Epic("buyMe Automation")
+@Feature("LoginPage Testing")
+    ////loginViaGoogleTesting///
 
-    @Epic("buyMe Automation")
-    @Feature("LoginPage Testing")
-
+    public class LoginTest extends Base {
 
     @BeforeMethod
     public void LoginPageAppears(){

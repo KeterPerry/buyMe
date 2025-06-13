@@ -82,6 +82,10 @@ public class BasePage {
         return driver.findElement(locator).isDisplayed();
     }
 
+    public boolean is_displayed(By locator) {
+        return driver.findElement(locator).isDisplayed();
+    }
+
     public boolean is_present(By locator) {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(locator));

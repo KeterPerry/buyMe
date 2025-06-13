@@ -1,6 +1,6 @@
+package tests;
 import io.qameta.allure.*;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.io.IOException;
 import static testsData.Constants.*;
@@ -9,7 +9,6 @@ import static testsData.Constants.*;
 @Feature("Homepage Testing")
 
 public class HomeTest extends Base {
-
 
 
     @Test

@@ -3,6 +3,9 @@ package pageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+
+//////loginViaGoogle////////
+
 public class LoginPage extends BasePage{
 
     public WebDriver driver;

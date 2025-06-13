@@ -1,11 +1,11 @@
-
+package tests;
 import com.mailosaur.MailosaurException;
+import flows.RegistrationFlows;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.io.IOException;
@@ -13,14 +13,16 @@ import java.util.Optional;
 import static testsData.Constants.*;
 
 
+@Epic("buyMe Automation")
+@Feature("RegistrationPage Testing")
 
 public class RegistrationTest extends Base {
 
-        @Epic("buyMe Automation")
-        @Feature("RegistrationPage Testing")
+    RegistrationFlows registrationFlows;
 
         @BeforeMethod
         public void registrationPageAppears(){
+            this.registrationFlows=new RegistrationFlows(driver);
             verifyRegistrationPageLoads();
             verifyRegistrationPopupAppears();
         }
@@ -75,30 +77,16 @@ public class RegistrationTest extends Base {
         }
 
 //@Test 2
-
-
         @Step
         public void verifyValidRegistration() throws MailosaurException, IOException, InterruptedException {
             String validEmail = readFromFile("email");
             String fullName = readFromFile("fullName");
             String telephone_num = readFromFile("telephone_num");
             String website_name = readFromFile("websiteName");
-            registrationPage.registerSuccessfully(validEmail,fullName,telephone_num);
-//            registrationPage.clickOnBtn(registrationPage.email_btn);
-//            registrationPage.setField(registrationPage.email_field, validEmail);
-//            registrationPage.clickOnBtn(registrationPage.buttonSubmit);
-            //String verificationCode = email_phoneVerfication();
-            //registrationPage.clickOnBtn(homePage.login_registration_btn);
-            //registrationPage.clickOnBtn(registrationPage.email_field);
-//            registrationPage.setField(registrationPage.email_code, verificationCode);
-//            registrationPage.clickOnBtn(registrationPage.buttonSubmit_mail_verification);
-//            registrationPage.setField(registrationPage.fullName, fullName);
-//            registrationPage.setField(registrationPage.telephone_num_field,telephone_num);
-//            registrationPage.clickOnCheckBox(registrationPage.checkBox);
-//            registrationPage.clickOnBtn(registrationPage.register_button);
-            attachScreenshot(driver,"verifyValidRegistration");
-            Assert.assertEquals(websiteName,website_name);
-
+            if (registrationFlows.register_or_login_successfully(validEmail,fullName,telephone_num)) {
+                attachScreenshot(driver, "verifyValidRegistration");
+                Assert.assertEquals(websiteName, website_name);
+            }
         }
 
 

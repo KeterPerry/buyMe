@@ -1,5 +1,7 @@
-
+package tests;
 import com.mailosaur.models.*;
+import flows.PurchaseGiftFlows;
+import flows.RegistrationFlows;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
@@ -46,8 +48,10 @@ public class Base {
     protected Dotenv dotenv;
     protected HomePage homePage;
     protected RegistrationPage registrationPage;
+    protected RegistrationFlows registrationFlows;
     protected LoginPage loginPage;
     protected GiftPage giftPage;
+    protected PurchaseGiftPage purchaseGiftPage;
     protected BasePage basePage;
     protected String websiteName;
 
@@ -89,6 +93,7 @@ public class Base {
         basePage=new BasePage(driver);
         registrationPage = new RegistrationPage(driver);
         giftPage=new GiftPage(driver);
+        purchaseGiftPage=new PurchaseGiftPage(driver);
         homePage=new HomePage(driver);
         loginPage=new LoginPage(driver);
 

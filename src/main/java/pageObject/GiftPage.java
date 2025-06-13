@@ -14,8 +14,8 @@ public class GiftPage extends BasePage{
     public By chef_voucher= By.xpath("//a[@href=\"https://buyme.co.il/supplier/752649?catName=%D7%9E%D7%AA%D7%A0%D7%95%D7%AA%20%D7%9C%D7%99%D7%95%D7%9D%20%D7%94%D7%95%D7%9C%D7%93%D7%AA&catUrl=%D7%9E%D7%AA%D7%A0%D7%95%D7%AA%20%D7%9C%D7%99%D7%95%D7%9D%20%D7%94%D7%95%D7%9C%D7%93%D7%AA\"]");
     public By choice_btn_submit= By.xpath("//button[@class='button button--medium button--solid' and @aria-label='בחירה']");
     public By errorMessage= By.xpath("//div[@class='text-field__error-message']");
-    public By price_field= By.cssSelector("input[name=\"cardPrice\"]");
-    public By first_step= By.xpath("//div[@class=\"steps-line__step__title\" and contains(text(), 'למי לשלוח')]");
+    //public By price_field= By.cssSelector("input[name=\"cardPrice\"]");
+    //public By first_step= By.xpath("//div[@class=\"steps-line__step__title\" and contains(text(), 'למי לשלוח')]");
     //to send_page elements
     public By getForSomeone= By.cssSelector("input[id=\"למישהו אחר-forMyself\"]");
     public By getForMyself= By.cssSelector("input[id=\"לעצמי-forMyself\"]");
@@ -70,17 +70,17 @@ public class GiftPage extends BasePage{
         this.send_video_pic(locator, path);
         return this;
     }
-
-    public GiftPage settingFieldsPhaseOne(String VIDEO_PIC_PATH, String  GIFT_RECEIVER_NAME, String  BLESSING_TEXT) throws InterruptedException {
-        clickOnBtn(getForSomeone);
-        setField(gift_reciever, GIFT_RECEIVER_NAME);
-        clickOnBtn(events_dropdown);
-        clickOnBtn(event_selected);
-        sendText(bless_textarea, BLESSING_TEXT);
-        sendVideoPic(video_or_pic, VIDEO_PIC_PATH);
-        clickOnBtn(next_btn);
-        return this;
-    }
+//
+//    public GiftPage settingFieldsPhaseOne(String VIDEO_PIC_PATH, String  GIFT_RECEIVER_NAME, String  BLESSING_TEXT) throws InterruptedException {
+//        clickOnBtn(getForSomeone);
+//        setField(gift_reciever, GIFT_RECEIVER_NAME);
+//        clickOnBtn(events_dropdown);
+//        clickOnBtn(event_selected);
+//        sendText(bless_textarea, BLESSING_TEXT);
+//        sendVideoPic(video_or_pic, VIDEO_PIC_PATH);
+//        clickOnBtn(next_btn);
+//        return this;
+//    }
 
 
 }
