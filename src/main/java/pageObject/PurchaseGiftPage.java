@@ -34,11 +34,6 @@ public class PurchaseGiftPage extends BasePage{
         return this;
     }
 
-    public PurchaseGiftPage forceClick(By locator){
-        this.force_click(locator);
-        return this;
-    }
-
     public PurchaseGiftPage setField(By locator, String text_val){
         this.sendText(locator, text_val);
         return this;

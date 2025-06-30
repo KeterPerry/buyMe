@@ -9,12 +9,8 @@
     <fullName>Kineret Cohen</fullName>
     <invalid_email1>ketgmail.com</invalid_email1>
     <invalid_email2>ket@gmailcom</invalid_email2>
-    <invalid_email>keterav</invalid_email>
-    <valid_email>keterav@gmail.com</valid_email>
-    <code>456789</code>
-    <telephone_num>0507744085</telephone_num>
-    <password>keterP12345678@</password>
-
-
+    <code>YOUR_CODE_HERE</code>
+    <telephone_num>YOUR_TELEPHONE_NUM_HERE</telephone_num>
+    <password>YOUR_PASSWORD_HERE</password>
 
 </config>

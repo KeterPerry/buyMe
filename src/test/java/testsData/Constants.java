@@ -1,14 +1,14 @@
 package testsData;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Constants {
 
+    //loginTest
+    public static final String GOOGLE_ERROR_COLOR ="#b3261e";
+
     //giftTests
     // URLs
-    public static final String REGISTRATION_URL = "https://buyme.co.il/?modal=login";
     public static final String BASE_CATEGORY_URL = "https://buyme.co.il/categories/%D7%9E%D7%AA%D7%A0%D7%95%D7%AA%20%D7%9C%D7%99%D7%95%D7%9D%20%D7%94%D7%95%D7%9C%D7%93%D7%AA";
     public static final String VOUCHER_SCREEN_URL_PREFIX = "https://buyme.co.il/supplier/";
     public static final String PURCHASE_SCREEN_URL = "https://buyme.co.il/supplier/752649?catUrl=%D7%9E%D7%AA%D7%A0%D7%95%D7%AA+%D7%9C%D7%99%D7%95%D7%9D+%D7%94%D7%95%D7%9C%D7%93%D7%AA&catName=%D7%9E%D7%AA%D7%A0%D7%95%D7%AA+%D7%9C%D7%99%D7%95%D7%9D+%D7%94%D7%95%D7%9C%D7%93%D7%AA";
@@ -38,7 +38,6 @@ public class Constants {
     //homeTests
 
     public static final String GOOGLE_LOGIN_URL = "https://accounts.google.com/";
-    //public static final List<String> budgetOptions = ["100-199 ש"ח,"עד 99"];
 
     //test1
     public static final List<String> BUDGET_LIST = Arrays.asList(

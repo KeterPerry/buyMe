@@ -20,9 +20,9 @@ public class RegistrationPage extends BasePage {
     public By telephone_num_field= By.xpath("//input[@type=\"tel\"]");
     public By buttonSubmit= By.xpath("//button[@gtm=\"כניסה\" and @type=\"submit\"]");
     public By send_phone_verification_code_btn= By.xpath("//button[@gtm='שלחו לי קוד אימות']");
-    public By phone_verification_otp_code_field= By.xpath("////input[@id=\"otp-code\"]");
+    //public By phone_verification_otp_code_field= By.xpath("////input[@id=\"otp-code\"]");
     public By phone_verification_otp_code_btn= By.xpath("//button[@gtm=\"אימות טלפון\"]");
-    public By buttonSubmit_mail_verification= By.xpath("//button[@gtm=\"אימות מייל\"]");
+    //public By buttonSubmit_mail_verification= By.xpath("//button[@gtm=\"אימות מייל\"]");
     public By fullNameField= By.xpath("//input[@data-parsley-namecheck=\"full-name\"]");
     //public By phone_num= By.xpath("//input[@tuaandiinputdiscrp=\"טלפון נייד\"]");
     public By checkBox= By.xpath("//div[@class=\"login-options register-text terms\"]//div[@class=\"inner\"]/span[@role=\"checkbox\"]");

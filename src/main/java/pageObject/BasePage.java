@@ -1,5 +1,4 @@
 package pageObject;
-
 import com.mailosaur.MailosaurClient;
 import com.mailosaur.MailosaurException;
 import com.mailosaur.models.Message;
@@ -10,8 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.cdimascio.dotenv.Dotenv;
-
-
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
@@ -71,11 +68,6 @@ public class BasePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
-
-    public void clear(By locator) {
-        elementVisibility(locator);
-        driver.findElement(locator).clear();
-    }
 
     public boolean isDisplayed(By locator) {
         elementVisibility(locator);

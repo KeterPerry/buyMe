@@ -53,7 +53,6 @@ public class RegistrationFlows {
         }
     }
         catch (NoSuchElementException e){
-            /////Login-ifDoubleAuthIsNotRequired
          return true;
         }
     return true;

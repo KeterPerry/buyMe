@@ -19,7 +19,6 @@ public class HomePage extends BasePage {
     public By clear_fields_btn= By.xpath("//button[@gtm='נקה חיפוש']");
     //voucher
     public By checking_voucher_balance_btn= By.xpath("//ul[@class='nav-bar buttons nav-bar-box nav-bar-left']//li[2]/a");
-    public By voucher_popUp= By.xpath("//div[@class=\"inner popout\"]");
     public By voucher_code_field= By.xpath("//div[@class=\"inner popout\"]//input[@data-parsley-required-message=\"יש להזין קוד שובר\"]");
     public By voucher_expired_date_field= By.xpath("//div[@class=\"inner popout\"]//input[@data-parsley-required-message=\"יש להזין תוקף שובר\"]");
     public By checking_balance_button_submit= By.xpath("//button[@gtm=\"לבדיקת היתרה\"]");

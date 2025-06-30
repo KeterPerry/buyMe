@@ -16,6 +16,7 @@ public class LoginPage extends BasePage{
     public By next_btn=By.cssSelector("button[id='identifierNext']");
     public By error_message=By.xpath("//div[@jsname=\"dWPKW\"]//span[@jsslot]");
     public By try_again_message=By.xpath("//a[@id=\"next\"]");
+    public By use_another_account=By.xpath("//div[@class=\"jbiPi\"]");
 
 
     //constructor

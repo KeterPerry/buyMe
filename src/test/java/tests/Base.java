@@ -1,11 +1,7 @@
 package tests;
-import com.mailosaur.models.*;
-import flows.PurchaseGiftFlows;
 import flows.RegistrationFlows;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
-import io.qameta.allure.Step;
-import io.qameta.allure.testng.AllureTestNg;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,28 +11,16 @@ import org.testng.annotations.*;
 import org.w3c.dom.NodeList;
 import pageObject.*;
 import io.github.cdimascio.dotenv.Dotenv;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import io.qameta.allure.Attachment;
-
-import com.mailosaur.MailosaurClient;
-import com.mailosaur.MailosaurException;
-import com.mailosaur.models.MessageSearchParams;
-
 import static testsData.Constants.SENDING_GIFTS_TO_EMPLOYEES_PAGE;
 
 
@@ -165,10 +149,7 @@ public class Base {
     }
 
 public void verifyError(By error_element, String expectedErrorMesseage, String expectedColor, String stepName) throws IOException, InterruptedException {
-    //System.out.println("expected message:" + expectedErrorMesseage);
-    //System.out.println("expected color:" + expectedColor);
-    //System.out.println("actual result message:" + actualErrorMessage);
-    //System.out.println("actual result color:" + actualColor);
+
     try {
         String actualErrorMessage = basePage.get_text(error_element);
         String actualColor = basePage.getCssValue(error_element,"color");

@@ -9,6 +9,8 @@ import testsData.Constants;
 import java.io.IOException;
 import java.util.Optional;
 
+import static testsData.Constants.GOOGLE_ERROR_COLOR;
+
 @Epic("buyMe Automation")
 @Feature("LoginPage Testing")
     ////loginViaGoogleTesting///
@@ -61,14 +63,14 @@ import java.util.Optional;
         do {
             loginPage.setField(loginPage.mail_field, invalidEmail);
             loginPage.clickOnBtn(loginPage.next_btn);
-            if(trials<2)
+            if(trials<3)
             {loginPage.clickOnBtn(loginPage.try_again_message);}
             trials++;
         }
-        while (trials<3);
+        while (trials<4);
 
         attachScreenshot(driver,"verifyErrorMessageInRed");
-        verifyError(loginPage.error_message, loginPage.getText(loginPage.error_message),"#b3261e","verifyErrorMessageInRed");
+        verifyError(loginPage.error_message, loginPage.getText(loginPage.error_message),GOOGLE_ERROR_COLOR,"verifyErrorMessageInRed");
 
     }
 
